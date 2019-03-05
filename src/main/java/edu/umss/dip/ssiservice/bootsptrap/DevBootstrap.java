@@ -20,16 +20,18 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private EmployeeRepository employeeRepository;
     private PositionRepository positionRepository;
     private ContractRepository contractRepository;
+    private AccidentRepository accidentRepository;
 
     public DevBootstrap(CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository,
             ItemRepository itemRepository, EmployeeRepository employeeRepository,
-            PositionRepository positionRepository, ContractRepository contractRepository) {
+            PositionRepository positionRepository, ContractRepository contractRepository, AccidentRepository accidentRepository) {
         this.categoryRepository = categoryRepository;
         this.subCategoryRepository = subCategoryRepository;
         this.itemRepository = itemRepository;
         this.employeeRepository = employeeRepository;
         this.positionRepository = positionRepository;
         this.contractRepository = contractRepository;
+        this.accidentRepository = accidentRepository;
     }
 
     @Override
@@ -93,6 +95,11 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         contract.setEmployee(john);
         contract.setInitDate(new Date(2010, 1, 1));
         contract.setPosition(position);
+
+        // Accident
+        Accident accident = new Accident();
+        accident.setEmployee(john);
+        accident.setDate(new Date(2010, 1, 1));
 
         john.getContracts().add(contract);
         employeeRepository.save(john);
